@@ -17,8 +17,8 @@ Resources:
           ToPort: 22
           CidrIp: 0.0.0.0/0
       Tags:
-        Key: Name
-        Value: My first Sec Group
+        - Key: Name
+          Value: My first Sec Group
   WebServerHost:
     Type: AWS::EC2::Instance
     Properties:
@@ -28,8 +28,8 @@ Resources:
       SecurityGroupIds:
         - !Ref WebServerSecurityGroup
       Tags:
-        Key: Name
-        Value: !Sub Web Server of ${AWS::StackName} Stack
+        - Key: Name
+          Value: !Sub Web Server of ${AWS::StackName} Stack
       UserData: 
         Fn::Base64:
           !Sub |
@@ -37,8 +37,16 @@ Resources:
           yum update -y
           yum install httpd -y
           cd /var/www/html/
-          wget 
-
-
+          wget https://github.com/yavuz72/seckinkitaplar/blob/main/index.html
+          wget https://github.com/yavuz72/seckinkitaplar/blob/main/book0.jpg
+          wget https://github.com/yavuz72/seckinkitaplar/blob/main/book1.jpg
+          wget https://github.com/yavuz72/seckinkitaplar/blob/main/book2.jpg
+          systemctl start httpd
+          systemctl enable httpd
 
 Outputs:
+  WebsiteURL:
+    Value: !Sub 
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt WebServerHost.PublicDnsName
+    Description: Seckinkitaplar URL
