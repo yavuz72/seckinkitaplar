@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description:
-  Cloudformation template for Kittens Carousel Static Website. Which is downloaded from Github and deployed on Apache on EC2.
+  Cloudformation template for seckinkitaplar.com copied from Kittens Carousel Static Website. Which is downloaded from Github and deployed on Apache on EC2.
         
 Resources:
   WebServerSecurityGroup:
